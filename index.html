@@ -11,10 +11,13 @@
 
 	<div class="board">
 	</div>
-
+	<div class="controls">
+		<button class="try-again">重来</button>
+		<button class="recognize">识别</button>
+	</div>
 	<script>
 		$(document).ready(function() {
-			var totalNumber = 112 * 112;
+			var totalNumber = 28 * 28;
 			for (var i = 0; i < totalNumber; i++) {
 				var pixel = $("<div></div>").addClass("pixel");
 				$(".board").append(pixel);
@@ -37,6 +40,10 @@
 					$(this).addClass("blue");
 				}
 			});
+
+			$(".try-again").click(function() {
+				location.reload();
+			});
 		});
 	</script>
 	
@@ -46,19 +53,46 @@
 	.board {
 		width: 560px;
 		margin: 0 auto;
+		overflow: hidden;
 	}
 
 	.pixel {
-		width: 5px;
-		height: 5px;
+		width: 20px;
+		height: 20px;
 		margin: 0;
 		padding: 0;
 		background-color: yellow;
 		float: left;
+		transition: all 2s;
+	}
+
+	.pixel:hover {
+		background-color: gray;
 	}
 
 	.pixel.blue {
 		background-color: blue;
+	}
+
+	.controls {
+		width: 560px;
+    	margin: 30px auto;
+	}
+
+	button {
+		width: 276px;
+		height: 60px;
+		background-color: lightseagreen;
+		outline: none;
+		border: none;
+		color: white;
+		font-size: 20px;
+		cursor: pointer;
+		transition: all 2s;
+	}
+
+	button:hover {
+		background-color: darkgreen;
 	}
 </style>
 </html>
