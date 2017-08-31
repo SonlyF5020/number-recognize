@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Number</title>
-	<link rel="stylesheet" href="">
+	<link rel="icon" href="https://image.flaticon.com/icons/png/128/179/179350.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 </head>
 <body>
@@ -14,9 +14,23 @@
 	<div class="controls">
 		<button class="try-again">重来</button>
 		<button class="recognize">识别</button>
+		<div class="output">?</div>
 	</div>
 	<script>
 		$(document).ready(function() {
+			function getPixelData() {
+				var inputs = {};
+				$(".board .pixel").each(function(index, element) {
+					var pixelValue = $(this).data("value") === "1" ? 1 : 0;
+					inputs["f" + (index +1)] = {
+						"dataType" : 40,
+						"dataValue": pixelValue
+					}
+				});
+
+				return {"inputs": [inputs]};
+			}
+
 			var totalNumber = 28 * 28;
 			for (var i = 0; i < totalNumber; i++) {
 				var pixel = $("<div></div>").addClass("pixel");
@@ -37,12 +51,18 @@
 				console.log("editing", document.editing);
 				if (document.editing) {
 					$(this).addClass("blue");
+					$(this).data({"value": "1"});
 				}
 			});
 
 			$(".try-again").click(function() {
 				location.reload();
 			});
+
+			$(".recognize").click(function() {
+				var pixelData = getPixelData();
+				$(".output").text("2");
+			})
 		});
 	</script>
 	
@@ -79,7 +99,9 @@
 	}
 
 	button {
-		width: 276px;
+		vertical-align: middle;
+    	box-sizing: border-box;
+		width: 243px;
 		height: 60px;
 		background-color: lightseagreen;
 		outline: none;
@@ -92,6 +114,19 @@
 
 	button:hover {
 		background-color: darkgreen;
+	}
+
+	.output {
+		vertical-align: middle;
+    	box-sizing: border-box;
+    	width: 60px;
+    	height: 60px;
+    	font-size: 24px;
+    	padding-top: 10px;
+    	text-align: center;
+		display: inline-block;
+		border: solid 3px black;
+		font-weight: bold;
 	}
 </style>
 </html>
