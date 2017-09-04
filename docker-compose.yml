@@ -1,0 +1,12 @@
+version: '2'
+services:
+  app:
+    build: .
+    ports:
+     - "8080:80"
+    image: benweizhu/hackh5
+  proxy:
+    build: ./server
+    ports: 
+     - "8083:8083"
+    image: benweizhu/hackh5proxy
